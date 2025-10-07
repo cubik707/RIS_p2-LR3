@@ -62,7 +62,6 @@ namespace RIS_p2_LR3
 
             if (SaveData())
             {
-                Console.WriteLine($"Подразделение '{name}' успешно добавлено.");
                 return true;
             }
 
@@ -115,7 +114,6 @@ namespace RIS_p2_LR3
 
             if (SaveData())
             {
-                Console.WriteLine($"Подразделение '{oldName}' успешно обновлено.");
                 return true;
             }
 
@@ -141,7 +139,6 @@ namespace RIS_p2_LR3
 
             if (SaveData())
             {
-                Console.WriteLine($"Подразделение '{departmentName}' успешно удалено.");
                 return true;
             }
 

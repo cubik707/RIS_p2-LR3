@@ -1,0 +1,82 @@
+[
+  {
+    "Id": 1,
+    "Name": "IT отдел",
+    "Description": "Разработка программного обеспечения и техническая поддержка",
+    "EmployeeCount": 25,
+    "CreatedDate": "2024-01-15 09:00:00",
+    "LastModifiedDate": "2024-01-15 09:00:00"
+  },
+  {
+    "Id": 2,
+    "Name": "Отдел кадров",
+    "Description": "Управление персоналом и кадровый учет",
+    "EmployeeCount": 8,
+    "CreatedDate": "2024-01-15 09:15:00",
+    "LastModifiedDate": "2024-01-15 09:15:00"
+  },
+  {
+    "Id": 3,
+    "Name": "Бухгалтерия",
+    "Description": "Ведение финансового учета и отчетности",
+    "EmployeeCount": 12,
+    "CreatedDate": "2024-01-15 09:30:00",
+    "LastModifiedDate": "2024-01-15 09:30:00"
+  },
+  {
+    "Id": 4,
+    "Name": "Отдел продаж",
+    "Description": "Работа с клиентами и развитие продаж",
+    "EmployeeCount": 18,
+    "CreatedDate": "2024-01-15 09:45:00",
+    "LastModifiedDate": "2024-01-15 09:45:00"
+  },
+  {
+    "Id": 5,
+    "Name": "Производство",
+    "Description": "Изготовление продукции и контроль качества",
+    "EmployeeCount": 45,
+    "CreatedDate": "2024-01-15 10:00:00",
+    "LastModifiedDate": "2024-01-15 10:00:00"
+  },
+  {
+    "Id": 6,
+    "Name": "Маркетинг",
+    "Description": "Продвижение продукции и анализ рынка",
+    "EmployeeCount": 10,
+    "CreatedDate": "2024-01-15 10:15:00",
+    "LastModifiedDate": "2024-01-15 10:15:00"
+  },
+  {
+    "Id": 7,
+    "Name": "Логистика",
+    "Description": "Управление поставками и складскими запасами",
+    "EmployeeCount": 15,
+    "CreatedDate": "2024-01-15 10:30:00",
+    "LastModifiedDate": "2024-01-15 10:30:00"
+  },
+  {
+    "Id": 8,
+    "Name": "Юридический отдел",
+    "Description": "Правовое сопровождение деятельности компании",
+    "EmployeeCount": 6,
+    "CreatedDate": "2024-01-15 10:45:00",
+    "LastModifiedDate": "2024-01-15 10:45:00"
+  },
+  {
+    "Id": 9,
+    "Name": "Отдел качества",
+    "Description": "Контроль качества продукции и процессов",
+    "EmployeeCount": 14,
+    "CreatedDate": "2024-01-15 11:00:00",
+    "LastModifiedDate": "2024-01-15 11:00:00"
+  },
+  {
+    "Id": 10,
+    "Name": "Администрация",
+    "Description": "Общее руководство и координация работы",
+    "EmployeeCount": 5,
+    "CreatedDate": "2024-01-15 11:15:00",
+    "LastModifiedDate": "2024-01-15 11:15:00"
+  }
+]

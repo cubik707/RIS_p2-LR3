@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Web.Script.Serialization;
 
 namespace RIS_p2_LR3
 {
@@ -26,12 +27,10 @@ namespace RIS_p2_LR3
         {
             try
             {
-                var lines = new List<string>();
-                foreach (var department in departments)
-                {
-                    lines.Add($"{department.Id}|{department.Name}|{department.Description}|{department.EmployeeCount}|{department.CreatedDate:yyyy-MM-dd HH:mm:ss}|{department.LastModifiedDate:yyyy-MM-dd HH:mm:ss}");
-                }
-                File.WriteAllLines(_filePath, lines, Encoding.UTF8);
+                var jsonDepartments = departments.ConvertAll(d => DepartmentJson.FromDepartment(d));
+                var serializer = new JavaScriptSerializer();
+                string json = serializer.Serialize(jsonDepartments);
+                File.WriteAllText(_filePath, json, Encoding.UTF8);
                 return true;
             }
             catch (Exception ex)
@@ -54,31 +53,21 @@ namespace RIS_p2_LR3
                     return new List<Department>();
                 }
 
-                var lines = File.ReadAllLines(_filePath, Encoding.UTF8);
-                var departments = new List<Department>();
-
-                foreach (var line in lines)
+                string json = File.ReadAllText(_filePath, Encoding.UTF8);
+                if (string.IsNullOrWhiteSpace(json))
                 {
-                    if (string.IsNullOrWhiteSpace(line))
-                        continue;
-
-                    var parts = line.Split('|');
-                    if (parts.Length == 6)
-                    {
-                        var department = new Department
-                        {
-                            Id = int.Parse(parts[0]),
-                            Name = parts[1],
-                            Description = parts[2],
-                            EmployeeCount = int.Parse(parts[3]),
-                            CreatedDate = DateTime.Parse(parts[4]),
-                            LastModifiedDate = DateTime.Parse(parts[5])
-                        };
-                        departments.Add(department);
-                    }
+                    return new List<Department>();
                 }
 
-                return departments;
+                var serializer = new JavaScriptSerializer();
+                var jsonDepartments = serializer.Deserialize<List<DepartmentJson>>(json);
+                
+                if (jsonDepartments != null)
+                {
+                    return jsonDepartments.ConvertAll(jd => jd.ToDepartment());
+                }
+                
+                return new List<Department>();
             }
             catch (Exception ex)
             {

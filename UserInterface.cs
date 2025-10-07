@@ -75,7 +75,12 @@ namespace RIS_p2_LR3
         /// </summary>
         private void ShowMainMenu()
         {
-            Console.WriteLine("=== ГЛАВНОЕ МЕНЮ ===");
+            Console.Clear();
+            Console.WriteLine("================================================");
+            Console.WriteLine("    СИСТЕМА УЧЕТА СОТРУДНИКОВ В ПОДРАЗДЕЛЕНИЯХ");
+            Console.WriteLine("================================================");
+            Console.WriteLine();
+            Console.WriteLine("ГЛАВНОЕ МЕНЮ:");
             Console.WriteLine("1. Просмотр всех подразделений");
             Console.WriteLine("2. Добавить подразделение");
             Console.WriteLine("3. Изменить подразделение");
@@ -110,22 +115,35 @@ namespace RIS_p2_LR3
         /// </summary>
         private void ShowAllDepartments()
         {
-            Console.WriteLine("=== ВСЕ ПОДРАЗДЕЛЕНИЯ ===");
+            Console.Clear();
+            Console.WriteLine("================================================");
+            Console.WriteLine("              ВСЕ ПОДРАЗДЕЛЕНИЯ");
+            Console.WriteLine("================================================");
+            
             var departments = _departmentManager.GetAllDepartments();
 
             if (!departments.Any())
             {
-                Console.WriteLine("Подразделения не найдены.");
+                Console.WriteLine("\nПодразделения не найдены.");
                 return;
             }
 
-            Console.WriteLine($"Найдено подразделений: {departments.Count}");
+            Console.WriteLine($"\nНайдено подразделений: {departments.Count}");
             Console.WriteLine();
 
-            foreach (var department in departments)
+            for (int i = 0; i < departments.Count; i++)
             {
-                Console.WriteLine(department.ToString());
-                Console.WriteLine(new string('-', 80));
+                var department = departments[i];
+                
+                Console.WriteLine($"ПОДРАЗДЕЛЕНИЕ #{department.Id}: {department.Name}");
+                Console.WriteLine($"Описание: {department.Description}");
+                Console.WriteLine($"Сотрудников: {department.EmployeeCount}");
+                Console.WriteLine($"Создано: {department.CreatedDate:dd.MM.yyyy} | Изменено: {department.LastModifiedDate:dd.MM.yyyy}");
+                
+                if (i < departments.Count - 1)
+                {
+                    Console.WriteLine(new string('-', 50));
+                }
             }
         }
 
@@ -149,7 +167,10 @@ namespace RIS_p2_LR3
                 return;
             }
 
-            _departmentManager.AddDepartment(name, description, employeeCount);
+            if (_departmentManager.AddDepartment(name, description, employeeCount))
+            {
+                Console.WriteLine("\nПодразделение успешно добавлено!");
+            }
         }
 
         /// <summary>
@@ -198,7 +219,10 @@ namespace RIS_p2_LR3
                 employeeCount = newCount;
             }
 
-            _departmentManager.UpdateDepartment(id, name, description, employeeCount);
+            if (_departmentManager.UpdateDepartment(id, name, description, employeeCount))
+            {
+                Console.WriteLine("\nПодразделение успешно обновлено!");
+            }
         }
 
         /// <summary>
@@ -226,11 +250,14 @@ namespace RIS_p2_LR3
             var confirmation = Console.ReadLine();
             if (confirmation?.ToLower() == "y" || confirmation?.ToLower() == "yes")
             {
-                _departmentManager.DeleteDepartment(id);
+                if (_departmentManager.DeleteDepartment(id))
+                {
+                    Console.WriteLine("\nПодразделение успешно удалено!");
+                }
             }
             else
             {
-                Console.WriteLine("Удаление отменено.");
+                Console.WriteLine("\nУдаление отменено.");
             }
         }
 
@@ -239,7 +266,11 @@ namespace RIS_p2_LR3
         /// </summary>
         private void SearchDepartments()
         {
-            Console.WriteLine("=== ПОИСК ПОДРАЗДЕЛЕНИЙ ===");
+            Console.Clear();
+            Console.WriteLine("================================================");
+            Console.WriteLine("              ПОИСК ПОДРАЗДЕЛЕНИЙ");
+            Console.WriteLine("================================================");
+            Console.WriteLine();
             Console.Write("Введите поисковый запрос (название или описание): ");
             string searchTerm = Console.ReadLine();
 
@@ -247,17 +278,26 @@ namespace RIS_p2_LR3
 
             if (!results.Any())
             {
-                Console.WriteLine("Подразделения не найдены.");
+                Console.WriteLine("\nПодразделения не найдены.");
                 return;
             }
 
-            Console.WriteLine($"Найдено подразделений: {results.Count}");
+            Console.WriteLine($"\nНайдено подразделений: {results.Count}");
             Console.WriteLine();
 
-            foreach (var department in results)
+            for (int i = 0; i < results.Count; i++)
             {
-                Console.WriteLine(department.ToString());
-                Console.WriteLine(new string('-', 80));
+                var department = results[i];
+                
+                Console.WriteLine($"РЕЗУЛЬТАТ #{i + 1}: ID {department.Id} - {department.Name}");
+                Console.WriteLine($"Описание: {department.Description}");
+                Console.WriteLine($"Сотрудников: {department.EmployeeCount}");
+                Console.WriteLine($"Создано: {department.CreatedDate:dd.MM.yyyy} | Изменено: {department.LastModifiedDate:dd.MM.yyyy}");
+                
+                if (i < results.Count - 1)
+                {
+                    Console.WriteLine(new string('-', 50));
+                }
             }
         }
 
@@ -266,8 +306,12 @@ namespace RIS_p2_LR3
         /// </summary>
         private void SortDepartments()
         {
-            Console.WriteLine("=== СОРТИРОВКА ПОДРАЗДЕЛЕНИЙ ===");
-            Console.WriteLine("Выберите критерий сортировки:");
+            Console.Clear();
+            Console.WriteLine("================================================");
+            Console.WriteLine("            СОРТИРОВКА ПОДРАЗДЕЛЕНИЙ");
+            Console.WriteLine("================================================");
+            Console.WriteLine();
+            Console.WriteLine("КРИТЕРИЙ СОРТИРОВКИ:");
             Console.WriteLine("1. По названию");
             Console.WriteLine("2. По количеству сотрудников");
             Console.WriteLine("3. По дате создания");
@@ -276,33 +320,47 @@ namespace RIS_p2_LR3
 
             if (!int.TryParse(Console.ReadLine(), out int sortChoice) || sortChoice < 1 || sortChoice > 4)
             {
-                Console.WriteLine("Неверный выбор.");
+                Console.WriteLine("\nНеверный выбор.");
                 return;
             }
 
-            Console.WriteLine("Выберите порядок сортировки:");
+            Console.WriteLine("\nПОРЯДОК СОРТИРОВКИ:");
             Console.WriteLine("1. По возрастанию");
             Console.WriteLine("2. По убыванию");
             Console.Write("Ваш выбор: ");
 
             if (!int.TryParse(Console.ReadLine(), out int orderChoice) || orderChoice < 1 || orderChoice > 2)
             {
-                Console.WriteLine("Неверный выбор.");
+                Console.WriteLine("\nНеверный выбор.");
                 return;
             }
 
             string[] sortCriteria = { "", "name", "employees", "created", "modified" };
+            string[] sortNames = { "", "названию", "количеству сотрудников", "дате создания", "дате изменения" };
             bool ascending = orderChoice == 1;
 
             var sortedDepartments = _departmentManager.SortDepartments(sortCriteria[sortChoice], ascending);
 
-            Console.WriteLine($"Отсортированные подразделения ({sortCriteria[sortChoice]}, {(ascending ? "по возрастанию" : "по убыванию")}):");
+            Console.Clear();
+            Console.WriteLine("================================================");
+            Console.WriteLine("         ОТСОРТИРОВАННЫЕ ПОДРАЗДЕЛЕНИЯ");
+            Console.WriteLine("================================================");
+            Console.WriteLine($"Сортировка по {sortNames[sortChoice]} ({(ascending ? "по возрастанию" : "по убыванию")})");
             Console.WriteLine();
 
-            foreach (var department in sortedDepartments)
+            for (int i = 0; i < sortedDepartments.Count; i++)
             {
-                Console.WriteLine(department.ToString());
-                Console.WriteLine(new string('-', 80));
+                var department = sortedDepartments[i];
+                
+                Console.WriteLine($"#{i + 1}: ID {department.Id} - {department.Name}");
+                Console.WriteLine($"Описание: {department.Description}");
+                Console.WriteLine($"Сотрудников: {department.EmployeeCount}");
+                Console.WriteLine($"Создано: {department.CreatedDate:dd.MM.yyyy} | Изменено: {department.LastModifiedDate:dd.MM.yyyy}");
+                
+                if (i < sortedDepartments.Count - 1)
+                {
+                    Console.WriteLine(new string('-', 50));
+                }
             }
         }
 
@@ -311,8 +369,35 @@ namespace RIS_p2_LR3
         /// </summary>
         private void ShowStatistics()
         {
-            Console.WriteLine("=== СТАТИСТИКА ===");
-            Console.WriteLine(_departmentManager.GetStatistics());
+            Console.Clear();
+            Console.WriteLine("================================================");
+            Console.WriteLine("                  СТАТИСТИКА");
+            Console.WriteLine("================================================");
+            
+            var departments = _departmentManager.GetAllDepartments();
+            if (!departments.Any())
+            {
+                Console.WriteLine("\nНет данных для статистики.");
+                return;
+            }
+
+            var totalDepartments = departments.Count;
+            var totalEmployees = departments.Sum(d => d.EmployeeCount);
+            var avgEmployees = totalEmployees / (double)totalDepartments;
+            var maxEmployees = departments.Max(d => d.EmployeeCount);
+            var minEmployees = departments.Min(d => d.EmployeeCount);
+            var maxDept = departments.First(d => d.EmployeeCount == maxEmployees);
+            var minDept = departments.First(d => d.EmployeeCount == minEmployees);
+
+            Console.WriteLine();
+            Console.WriteLine("ОБЩАЯ СТАТИСТИКА:");
+            Console.WriteLine($"Общее количество подразделений: {totalDepartments}");
+            Console.WriteLine($"Общее количество сотрудников: {totalEmployees}");
+            Console.WriteLine($"Среднее количество сотрудников: {avgEmployees:F1}");
+            Console.WriteLine();
+            Console.WriteLine("ЭКСТРЕМАЛЬНЫЕ ЗНАЧЕНИЯ:");
+            Console.WriteLine($"Максимальное количество: {maxEmployees} ({maxDept.Name})");
+            Console.WriteLine($"Минимальное количество: {minEmployees} ({minDept.Name})");
         }
 
         /// <summary>
