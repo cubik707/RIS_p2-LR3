@@ -2,9 +2,6 @@ using System;
 
 namespace RIS_p2_LR3
 {
-    /// <summary>
-    /// Represents a department with employee count information
-    /// </summary>
     public class Department
     {
         public int Id { get; set; }

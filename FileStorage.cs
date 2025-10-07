@@ -6,9 +6,6 @@ using System.Web.Script.Serialization;
 
 namespace RIS_p2_LR3
 {
-    /// <summary>
-    /// Handles file storage operations for departments data
-    /// </summary>
     public class FileStorage
     {
         private readonly string _filePath;
@@ -18,11 +15,6 @@ namespace RIS_p2_LR3
             _filePath = filePath;
         }
 
-        /// <summary>
-        /// Saves departments list to file
-        /// </summary>
-        /// <param name="departments">List of departments to save</param>
-        /// <returns>True if successful, false otherwise</returns>
         public bool SaveDepartments(List<Department> departments)
         {
             try
@@ -40,10 +32,6 @@ namespace RIS_p2_LR3
             }
         }
 
-        /// <summary>
-        /// Loads departments list from file
-        /// </summary>
-        /// <returns>List of departments or empty list if file doesn't exist or error occurs</returns>
         public List<Department> LoadDepartments()
         {
             try
@@ -76,19 +64,11 @@ namespace RIS_p2_LR3
             }
         }
 
-        /// <summary>
-        /// Checks if data file exists
-        /// </summary>
-        /// <returns>True if file exists, false otherwise</returns>
         public bool FileExists()
         {
             return File.Exists(_filePath);
         }
 
-        /// <summary>
-        /// Creates backup of current data file
-        /// </summary>
-        /// <returns>True if backup created successfully, false otherwise</returns>
         public bool CreateBackup()
         {
             try

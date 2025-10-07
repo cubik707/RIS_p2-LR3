@@ -4,9 +4,6 @@ using System.Linq;
 
 namespace RIS_p2_LR3
 {
-    /// <summary>
-    /// Handles user interface and menu operations
-    /// </summary>
     public class UserInterface
     {
         private readonly DepartmentManager _departmentManager;
@@ -16,9 +13,6 @@ namespace RIS_p2_LR3
             _departmentManager = new DepartmentManager();
         }
 
-        /// <summary>
-        /// Main application loop
-        /// </summary>
         public void Run()
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
@@ -70,9 +64,6 @@ namespace RIS_p2_LR3
             }
         }
 
-        /// <summary>
-        /// Shows main menu
-        /// </summary>
         private void ShowMainMenu()
         {
             Console.Clear();
@@ -94,10 +85,6 @@ namespace RIS_p2_LR3
             Console.Write("Выберите действие: ");
         }
 
-        /// <summary>
-        /// Gets user choice from console
-        /// </summary>
-        /// <returns>User choice as integer</returns>
         private int GetUserChoice()
         {
             while (true)
@@ -110,9 +97,6 @@ namespace RIS_p2_LR3
             }
         }
 
-        /// <summary>
-        /// Shows all departments
-        /// </summary>
         private void ShowAllDepartments()
         {
             Console.Clear();
@@ -147,9 +131,6 @@ namespace RIS_p2_LR3
             }
         }
 
-        /// <summary>
-        /// Adds new department
-        /// </summary>
         private void AddDepartment()
         {
             Console.WriteLine("=== ДОБАВЛЕНИЕ ПОДРАЗДЕЛЕНИЯ ===");
@@ -173,9 +154,6 @@ namespace RIS_p2_LR3
             }
         }
 
-        /// <summary>
-        /// Updates existing department
-        /// </summary>
         private void UpdateDepartment()
         {
             Console.WriteLine("=== ИЗМЕНЕНИЕ ПОДРАЗДЕЛЕНИЯ ===");
@@ -225,9 +203,6 @@ namespace RIS_p2_LR3
             }
         }
 
-        /// <summary>
-        /// Deletes department
-        /// </summary>
         private void DeleteDepartment()
         {
             Console.WriteLine("=== УДАЛЕНИЕ ПОДРАЗДЕЛЕНИЯ ===");
@@ -261,9 +236,6 @@ namespace RIS_p2_LR3
             }
         }
 
-        /// <summary>
-        /// Searches departments
-        /// </summary>
         private void SearchDepartments()
         {
             Console.Clear();
@@ -301,9 +273,6 @@ namespace RIS_p2_LR3
             }
         }
 
-        /// <summary>
-        /// Sorts departments
-        /// </summary>
         private void SortDepartments()
         {
             Console.Clear();
@@ -364,9 +333,6 @@ namespace RIS_p2_LR3
             }
         }
 
-        /// <summary>
-        /// Shows statistics
-        /// </summary>
         private void ShowStatistics()
         {
             Console.Clear();
@@ -400,9 +366,6 @@ namespace RIS_p2_LR3
             Console.WriteLine($"Минимальное количество: {minEmployees} ({minDept.Name})");
         }
 
-        /// <summary>
-        /// Creates backup
-        /// </summary>
         private void CreateBackup()
         {
             Console.WriteLine("=== СОЗДАНИЕ РЕЗЕРВНОЙ КОПИИ ===");

@@ -2,9 +2,6 @@ using System;
 
 namespace RIS_p2_LR3
 {
-    /// <summary>
-    /// JSON representation of Department for serialization/deserialization
-    /// </summary>
     public class DepartmentJson
     {
         public int Id { get; set; }
@@ -14,10 +11,6 @@ namespace RIS_p2_LR3
         public string CreatedDate { get; set; }
         public string LastModifiedDate { get; set; }
 
-        /// <summary>
-        /// Converts DepartmentJson to Department
-        /// </summary>
-        /// <returns>Department object</returns>
         public Department ToDepartment()
         {
             return new Department
@@ -31,11 +24,6 @@ namespace RIS_p2_LR3
             };
         }
 
-        /// <summary>
-        /// Creates DepartmentJson from Department
-        /// </summary>
-        /// <param name="department">Department object</param>
-        /// <returns>DepartmentJson object</returns>
         public static DepartmentJson FromDepartment(Department department)
         {
             return new DepartmentJson
